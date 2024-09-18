@@ -1,0 +1,17 @@
+version: '3.8'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  django_backend:
+    build: .
+    image: quay.io/ai360/ai360studio-backend:nicv2
+    command: gunicorn django_backend.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=django_backend.settings
+    networks:
+      - backend

@@ -1,0 +1,100 @@
+.gap-10
+ {
+  gap: 10px;
+ }
+ .sidebar-dot-link::before {
+    content: '•'; 
+    margin-right: 8px; 
+    color:#ADB5BD; 
+    font-size: 14px; 
+}
+
+.sidebar-dot-link[data-bs-toggle="collapse"]::after {
+    display: none; 
+}
+.sidebar-dot-link, a.sidebar-dot-link {
+    background: #222e3c;
+    border-left: 3px solid transparent;
+    color: #ADB5BD;
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
+    padding: .625rem 1.625rem;
+    position: relative;
+    text-decoration: none;
+    transition: background .1s ease-in-out;
+}
+.sidebar-dropdown .sidebar-dropdown .sidebar-dot-link {
+    padding: .625rem 1.5rem .625rem 4.5rem;
+}
+ .basic-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 10px 0;
+        }
+        .basic-card p {
+            margin: 8px 0;
+            font-size: 14px;
+            display: flex;
+        }
+        .basic-card span {
+            font-weight: bold;
+            color: #333;
+            flex:0.5;
+        }
+        .basic-card span.value {
+            font-weight: normal;
+            color: #555;
+            font-size:small;
+            flex: 0.5;
+            
+           
+        }
+        .basic-card p span.label {
+            font-weight: bold;
+            color: #333;
+            
+        }
+       
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+         .breakdown-card {
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 10px 0;
+        }
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        .list-group-item span.value {
+            font-weight: normal;
+            color: #555;
+            margin-left: 10px;
+            
+        }
+        .list-group-item span.label {
+            font-weight: bold;
+            color: #333;
+        }
+        .table-scrollable {
+            overflow-x: auto;
+            display: block;
+            white-space: nowrap;
+        }
+        .table th, .table td {
+            padding: 0.75rem; /* Adjust the padding as needed */
+        }
+        .bg-color-gray {
+            background-color: #f5f5f5;
+        }

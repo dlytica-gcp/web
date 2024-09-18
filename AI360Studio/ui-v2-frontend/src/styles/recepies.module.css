@@ -1,0 +1,73 @@
+ /* .card-img-top {
+    height: 250px;
+    object-fit:contain;
+}
+
+
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.2;
+    color:#052c65;
+    font-family: 'Inter', sans-serif;
+
+}
+@media (min-width: 1200px) {
+    .h3, h3 {
+        font-size: 1.75rem;
+    }
+}
+.alert-primary
+{
+    padding: 16px;
+}
+h5
+{
+    font-size: 1.25rem;
+    margin-top: 0;
+    color: #212529 !important;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+ */
+/* recipes.module.css */
+.cardImgTop {
+    height: 250px;
+    object-fit: contain;
+  }
+  
+  .alertPrimary {
+    padding: 16px;
+  }
+  
+  .titleH3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #052c65;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .cardTitle {
+    font-size: 1.25rem;
+    margin-top: 0;
+    color: #212529 !important;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  
+  @media (min-width: 1200px) {
+    .titleH3 {
+      font-size: 1.75rem;
+    }
+  }
+  
+.cardtitle {
+    color: #939ba2;
+    font-size: .925rem;
+    font-weight: 600;
+}

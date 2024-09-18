@@ -1,0 +1,57 @@
+.navlink:hover {
+    text-decoration: underline;
+    text-decoration-color: #3b7ddd;
+    text-underline-offset: 0.4em; /* adjust the value to your liking */
+    text-decoration-thickness: 0.2em;
+  }
+  .nav-link {
+    transition: text-decoration-thickness 300ms ease-in-out,
+      text-underline-offset 300ms ease-in-out; /* add transition to thickness and offset */
+  }
+  .dropdown_item {
+    transition: text-decoration-color 0.3s ease, text-underline-offset 0.3s ease,
+      text-decoration-thickness 0.3s ease;
+  }
+  .nav-link {
+    transition: text-decoration-color 0.3s ease, text-underline-offset 0.3s ease,
+      text-decoration-thickness 0.3s ease;
+  }
+  
+  .dropdown_item:hover {
+    text-decoration: underline;
+    text-decoration-color: #3b7ddd;
+    text-underline-offset: 0.4em; /* adjust the value to your liking */
+    text-decoration-thickness: 0.2em;
+  }
+  .navlink.active {
+    font-weight: bold; /* Example: Making the active link bold */
+    color: #007bff; /* Example: Changing color for active state */
+  }
+  
+  .dropdown-item.active {
+    font-weight: bold; /* Example: Making the active dropdown item bold */
+    color: #007bff; /* Example: Changing color for active state */
+  }
+  .dropdownheader {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  .comingSoon {
+    color: red;
+    font-weight: bold;
+    animation: blink 2s step-start infinite;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0.6;
+    }
+  }
+  @media (min-width: 1400px) {
+    .justify_content_xxl_ends {
+      justify-content: flex-end;
+    }
+  }
+  

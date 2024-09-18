@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  nextjs_frontend:
+    build: .
+    image: quay.io/ai360/ai360studio-frontend:nicv2
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://127.0.0.1:32007
