@@ -22,11 +22,24 @@ const TabContent = (props) => {
       // Fetch all data concurrently
       const [basicInfo, lienData, interestrate, nominee, signatories] =
         await Promise.all([
-          legalDepositFetchData.getsavingdepo_basicinfo_derived(foracid, cif_id, "Fixed"),
+          legalDepositFetchData.getsavingdepo_basicinfo_derived(
+            foracid,
+            cif_id,
+            "Fixed"
+          ),
           legalDepositFetchData.getsaving_deposit_lien_details(foracid, cif_id),
-          legalDepositFetchData.getsaving_deposit_interest_rate_details(foracid, cif_id),
-          legalDepositFetchData.getsaving_deposit_nominee_details(foracid, cif_id),
-          legalDepositFetchData.getsaving_deposit_signatories_details(foracid, cif_id),
+          legalDepositFetchData.getsaving_deposit_interest_rate_details(
+            foracid,
+            cif_id
+          ),
+          legalDepositFetchData.getsaving_deposit_nominee_details(
+            foracid,
+            cif_id
+          ),
+          legalDepositFetchData.getsaving_deposit_signatories_details(
+            foracid,
+            cif_id
+          ),
         ]);
 
       // Filter basicInfo based on specific conditions
@@ -79,7 +92,15 @@ const TabContent = (props) => {
     if (document.getElementById(dashboardElement)) {
       embed();
     }
-  }, [foracid, cif_id, individualData, lienData, signatoriesData, interestRateData, nomineeData]);
+  }, [
+    foracid,
+    cif_id,
+    individualData,
+    lienData,
+    signatoriesData,
+    interestRateData,
+    nomineeData,
+  ]);
 
   // Fetch data from the API
   // const fetchData = async () => {
@@ -170,10 +191,9 @@ const TabContent = (props) => {
                       <div className="col-md-12 mb-4">
                         <div className="card basic-card">
                           <p>
-                            <span>Account Type :</span>
+                            <span>Account Name :</span>
                             <span className="value">
-                              {data["dim_product.product_scheme_type"] ||
-                                "null"}
+                              {data["dim_gam.acct_name"] || "null"}
                             </span>
                           </p>
                           <p>
@@ -213,22 +233,28 @@ const TabContent = (props) => {
                           <p>
                             <span>Account Status:</span>
                             <span className="value">
-                              {data["dim_gam.acct_cls_flg"] === "Y"
-                                ? "Closed"
-                                : "Open"}
+                              {data["dim_gam.account_status"] || "null"}
                             </span>
                           </p>
                           <p>
                             <span>Account Balance:</span>
-                            <span className="value">$10,000</span>
+                            <span className="value">
+                              {data["dim_gam.account_balance"] || "null"}
+                            </span>
                           </p>
                           <p>
                             <span>Interest Rate :</span>
-                            <span className="value">4.5%</span>
+                            <span className="value">
+                              {" "}
+                              {data["dim_gam.interest_rate"] || "null"}
+                            </span>
                           </p>
                           <p>
                             <span>Total Lien Amount:</span>
-                            <span className="value">$0</span>
+                            <span className="value">
+                              {" "}
+                              {data["dim_gam.lien_amt"] || "-"}
+                            </span>
                           </p>
                           <p>
                             <span>Dormant Status:</span>
@@ -245,11 +271,17 @@ const TabContent = (props) => {
                           </p>
                           <p>
                             <span>Min Balance:</span>
-                            <span className="value">$500</span>
+                            <span className="value">
+                              {data["dim_deposit_accounts.minimum_balance"] ||
+                                "-"}
+                            </span>
                           </p>
                           <p>
                             <span>Available Amount:</span>
-                            <span className="value">$9,500</span>
+                            <span className="value">
+                              {data["dim_deposit_accounts.available_amount"] ||
+                                "-"}
+                            </span>
                           </p>
                           <p>
                             <span>Close Status :</span>
@@ -262,40 +294,38 @@ const TabContent = (props) => {
                           <p>
                             <span>Last Txn Date:</span>
                             <span className="value">
-                              {data[
-                                "fact_transaction_details.last_transaction_date"
-                              ] || "-"}
+                              {data["dim_gam.last_transaction_date"] || "-"}
                             </span>
                           </p>
                           <p>
                             <span>Last Digital Txn Date:</span>
                             <span className="value">
-                              {data[
-                                "fact_transaction_details.last_digital_transaction_date"
-                              ] || "-"}
+                              {data["dim_gam.last_digital_transaction_date"] ||
+                                "-"}
                             </span>
                           </p>
                           <p>
                             <span>Last Branch Txn Date :</span>
                             <span className="value">
-                              {data[
-                                "fact_transaction_details.last_branch_transaction_date"
-                              ] || "-"}
+                              {data["dim_gam.last_branch_transaction_date"] ||
+                                "-"}
                             </span>
                           </p>
                           <p>
                             <span>Account Branch :</span>
-                            <span className="value">Main Street Branch</span>
+                            <span className="value">
+                              {data["dim_branch.branch_description"] || "-"}
+                            </span>
                           </p>
-                          <p>
-                            <span>Sanction Limit:</span>
+                          {/* <p>
+                            <span>Transaction Limit:</span>
                             <span className="value">$50,000</span>
-                          </p>
+                          </p> */}
                           <p>
                             <span>Freeze Status:</span>
                             <span className="value">
                               {data["dim_deposit_accounts.freeze_status"] ===
-                                "N"
+                              "N"
                                 ? "No"
                                 : "Yes"}
                             </span>
@@ -445,20 +475,23 @@ const TabContent = (props) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {lienData && lienData?.map((item, index) => (
-                          <tr key={index}>
-                            <td>{item["dim_lien.lien_start_date"] || "N/A"}</td>
-                            <td>
-                              {item["dim_lien.lien_expiry_date"] || "N/A"}
-                            </td>
-                            <td className="d-none d-md-table-cell">
-                              {item["dim_lien.lien_remarks"] || "N/A"}
-                            </td>
-                            <td>
-                              {item["dim_lien.lien_reason_code"] || "Unknown"}
-                            </td>
-                          </tr>
-                        ))}
+                        {lienData &&
+                          lienData?.map((item, index) => (
+                            <tr key={index}>
+                              <td>
+                                {item["dim_lien.lien_start_date"] || "N/A"}
+                              </td>
+                              <td>
+                                {item["dim_lien.lien_expiry_date"] || "N/A"}
+                              </td>
+                              <td className="d-none d-md-table-cell">
+                                {item["dim_lien.lien_remarks"] || "N/A"}
+                              </td>
+                              <td>
+                                {item["dim_lien.lien_reason_code"] || "Unknown"}
+                              </td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
                   </div>
@@ -478,33 +511,32 @@ const TabContent = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {interestRateData && interestRateData?.map((item, index) => (
-                        <tr key={index}>
-                          <td>
-                            {item["dim_interest_rate.start_date"] || "N/A"}
-                          </td>
-                          <td>{item["dim_interest_rate.end_date"] || "N/A"}</td>
-                          <td className="d-none d-md-table-cell">
-                            {item["dim_interest_rate.interest_rate"] || "N/A"}
-                          </td>
-                        </tr>
-                      ))}
+                      {interestRateData &&
+                        interestRateData?.map((item, index) => (
+                          <tr key={index}>
+                            <td>
+                              {item["dim_interest_rate.start_date"] || "N/A"}
+                            </td>
+                            <td>
+                              {item["dim_interest_rate.end_date"] || "N/A"}
+                            </td>
+                            <td className="d-none d-md-table-cell">
+                              {item["dim_interest_rate.interest_rate"] || "N/A"}
+                            </td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
                 <div className="card">
-                  <h5 className="card-title">
-                    Account Status Change Details
-                  </h5>
+                  <h5 className="card-title">Account Status Change Details</h5>
                 </div>
                 <table className="table table-sm">
                   <thead>
                     <tr>
                       <th>Effective Start Date</th>
                       <th>Effective End Date</th>
-                      <th className="d-none d-md-table-cell">
-                        Account Status
-                      </th>
+                      <th className="d-none d-md-table-cell">Account Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -554,19 +586,20 @@ const TabContent = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {nomineeData && nomineeData?.map((item, index) => (
-                        <tr key={index}>
-                          <td>{item["dim_nominee.nominee_name"] || "N/A"}</td>
-                          <td>
-                            {item["dim_nominee.nominee_address"] || "N/A"}
-                          </td>
-                          <td className="d-none d-md-table-cell">
-                            {item["dim_nominee.nominee_id"] || "N/A"}
-                          </td>
-                          <td>N/A</td>
-                          <td>N/A</td>
-                        </tr>
-                      ))}
+                      {nomineeData &&
+                        nomineeData?.map((item, index) => (
+                          <tr key={index}>
+                            <td>{item["dim_nominee.nominee_name"] || "N/A"}</td>
+                            <td>
+                              {item["dim_nominee.nominee_address"] || "N/A"}
+                            </td>
+                            <td className="d-none d-md-table-cell">
+                              {item["dim_nominee.nominee_id"] || "N/A"}
+                            </td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
@@ -623,9 +656,7 @@ const TabContent = (props) => {
                     <tr>
                       <th>Effective Start Date</th>
                       <th>Effective End Date</th>
-                      <th className="d-none d-md-table-cell">
-                        Account Status
-                      </th>
+                      <th className="d-none d-md-table-cell">Account Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -672,20 +703,21 @@ const TabContent = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {signatoriesData && signatoriesData?.map((item, index) => (
-                      <tr key={index}>
-                        <td>
-                          {item["dim_signatories.signatory_name"] || "N/A"}
-                        </td>
+                    {signatoriesData &&
+                      signatoriesData?.map((item, index) => (
+                        <tr key={index}>
+                          <td>
+                            {item["dim_signatories.signatory_name"] || "N/A"}
+                          </td>
 
-                        <td className="d-none d-md-table-cell">
-                          {item[
-                            "dim_signatories.signatory_relationship_type"
-                          ] || "N/A"}
-                        </td>
-                        <td>N/A</td>
-                      </tr>
-                    ))}
+                          <td className="d-none d-md-table-cell">
+                            {item[
+                              "dim_signatories.signatory_relationship_type"
+                            ] || "N/A"}
+                          </td>
+                          <td>N/A</td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>

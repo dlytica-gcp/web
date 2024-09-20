@@ -1,6 +1,6 @@
 // components/TabContent.js
 import Link from "next/link";
-import { useEffect, useState,useRef,useCallback } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { renderCharts } from "../../components/charts/loan-chart";
@@ -18,16 +18,18 @@ const TabContent = (props) => {
 
   const [loading, setLoading] = useState(true);
   const [loanDataFunded, setLoanDataFunded] = useState([]);
+  const [loanDataBasic, setLoanDataBasic] = useState([]);
   const [loanDataLcIss, setLoanDataLcIss] = useState([]);
   const [loanDataBgOutstanding, setLoanDataBgOutStanding] = useState([]);
   const [loanDataBgReg, setLoanDataBgReg] = useState([]);
   const [loanDataLcOut, setLoanDataLcOut] = useState([]);
 
-  const fetchAllData =useCallback( async () => {
+  const fetchAllData = useCallback(async () => {
     try {
       // Fetch all data concurrently
       const [fundedloan, lciss, bgout, bgreg, lcout] = await Promise.all([
         loanFetchData.getindivid_loan_details_info(inv_id),
+        loanFetchData.getindivid_loan_basic_derived_info(inv_id),
         loanFetchData.getnon_funded_loan_lc_issuance(inv_id),
         loanFetchData.getnon_funded_bg_outstanding(inv_id),
         loanFetchData.getnon_funded_bg_register(inv_id),
@@ -40,19 +42,20 @@ const TabContent = (props) => {
       setLoanDataBgReg(bgreg);
       setLoanDataLcIss(lciss);
       setLoanDataLcOut(lcout);
+      setLoanDataBasic(inv_id);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
     }
-  },[inv_id]);
+  }, [inv_id]);
 
   useEffect(() => {
     // if (!hasFetched.current) {
-      fetchAllData();
-     
+    fetchAllData();
+
     // }
-  }, [inv_id,fetchAllData]);
+  }, [inv_id, fetchAllData]);
 
   // Fetch data from the API
   // const fetchData = async () => {
@@ -143,7 +146,7 @@ const TabContent = (props) => {
               aria-selected="false"
               tabIndex="-1"
             >
-             Insights
+              Insights
             </a>
           </li>
         </ul>
@@ -160,42 +163,57 @@ const TabContent = (props) => {
               role="tabpanel"
             >
               {/* <h4 className="tab-title">Basic Info</h4> */}
-              <div className="row">
-                <div className="col-md-12 mb-4">
-                  <div className="card basic-card">
-                    <p>
-                      <span>Total No of Loans :</span>
-                      <span className="value">100</span>
-                    </p>
-                    <p>
+              {loanDataBasic &&
+                loanDataBasic.map((data, index) => (
+                  <div key={`${data.c_id}-${index}`}>
+                    <div className="row">
+                      <div className="col-md-12 mb-4">
+                        <div className="card basic-card">
+                          <p>
+                            <span>Total No of Funded Loans :</span>
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.total_number_of_funded_loans"] ||
+                                "N/A"}
+                            </span>
+                          </p>
+                          {/* <p>
                       <span>Total Loan Amount :</span>
                       <span className="value">$1,000,000</span>
-                    </p>
-                    <p>
-                      <span>Total Transaction Limit :</span>
-                      <span className="value">$2,500,000</span>
-                    </p>
-                    <p>
-                      <span>Total Outdrawing Power Limit :</span>
-                      <span className="value">$500,000</span>
-                    </p>
-                    <p>
+                    </p> */}
+                          <p>
+                            <span>Total Sanction Limit :</span>
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.total_sanction_limit"] ||
+                                "N/A"}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Total Outdrawing Power Limit :</span>
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.total_outdrawing_power"] ||
+                                "N/A"}
+                            </span>
+                          </p>
+                          {/* <p>
                       <span>Total Outstanding Balance limit:</span>
                       <span className="value">$750,000</span>
-                    </p>
-                    <p>
-                      <span>Total Overdue amount:</span>
-                      <span className="value">$50,000</span>
-                    </p>
-                    <p>
+                    </p> */}
+                          <p>
+                            <span>Total Overdue amount:</span>
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.total_overdue_amount"] ||
+                                "N/A"}
+                            </span>
+                          </p>
+                          {/* <p>
                       <span>Total Principal Overdue amt:</span>
                       <span className="value">$30,000</span>
                     </p>
                     <p>
                       <span>Total Interest Overdue Amt:</span>
                       <span className="value">$20,000</span>
-                    </p>
-                    <p>
+                    </p> */}
+                          {/* <p>
                       <span>Total Interest Paid:</span>
                       <span className="value">$100,000</span>
                     </p>
@@ -206,31 +224,36 @@ const TabContent = (props) => {
                     <p>
                       <span>Count of missed installment:</span>
                       <span className="value">10</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="tab-pane" role="tabpanel">
-                {/* <h4 className="tab-title">Derived Info</h4> */}
-                <div className="row">
-                  <div className="col-md-12 mb-4">
-                    <div className="basic-card card">
-                      <p>
-                        <span>First Overdue Date :</span>
-                        <span className="value">2023-05-15</span>
-                      </p>
+                    </p> */}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="tab-pane" role="tabpanel">
+                      {/* <h4 className="tab-title">Derived Info</h4> */}
+                      <div className="row">
+                        <div className="col-md-12 mb-4">
+                          <div className="basic-card card">
+                            <p>
+                              <span>First Overdue Date :</span>
+                              <span className="value">
+                                {convertDateToYMD(data["dim_loan_accounts_funded.first_overdue_date"]) ||
+                                  "N/A"}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                ))}
             </div>
           )}
 
           <div className="tab-pane" id="primary-tab-3" role="tabpanel">
-            {/* <h4 className="tab-title">Details Info</h4> */}
+           
             <div className="row">
               <div className="col-sm-12">
-                {/* Funded Loan Table */}
+             
                 <div className="card">
                   <div className="card-header">
                     <h5 className="card-title">Funded Loan</h5>
@@ -283,10 +306,8 @@ const TabContent = (props) => {
             </div>
           </div>
           <div className="tab-pane" id="primary-tab-2" role="tabpanel">
-            {/* <h4 className="tab-title">Details Info</h4> */}
             <div className="row">
               <div className="col-sm-12">
-                {/* Funded Loan Table */}
                 <div className="card">
                   <div className="card-header">
                     <h5 className="card-title"> LC Issuance</h5>
@@ -334,15 +355,16 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item["dim_non_funded_lc_issuance.date_opnd"]) ||
-                                  "N/A"}
+                                {convertDateToYMD(
+                                  item["dim_non_funded_lc_issuance.date_opnd"]
+                                ) || "N/A"}
                               </td>
 
                               <td className="d-none d-md-table-cell">
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_lc_issuance.expiry_date"
-                                ])|| "N/A"}
+                                {convertDateToYMD(
+                                  item["dim_non_funded_lc_issuance.expiry_date"]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
@@ -416,9 +438,11 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_lc_issuance.last_ship_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_lc_issuance.last_ship_date"
+                                  ]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
@@ -521,15 +545,19 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_lc_outstanding.date_opnd"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_lc_outstanding.date_opnd"
+                                  ]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_lc_outstanding.expiry_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_lc_outstanding.expiry_date"
+                                  ]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
@@ -598,9 +626,11 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_lc_outstanding.last_ship_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_lc_outstanding.last_ship_date"
+                                  ]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
@@ -684,9 +714,9 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_bg_register.issue_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item["dim_non_funded_bg_register.issue_date"]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
@@ -728,15 +758,19 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_bg_register.bg_expiry_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_bg_register.bg_expiry_date"
+                                  ]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_bg_register.claim_expiry_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_bg_register.claim_expiry_date"
+                                  ]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
@@ -745,9 +779,9 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_bg_register.close_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item["dim_non_funded_bg_register.close_date"]
+                                ) || "N/A"}
                               </td>
                             </tr>
                           ))}
@@ -792,9 +826,11 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_bg_outstanding.issue_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_bg_outstanding.issue_date"
+                                  ]
+                                ) || "N/A"}
                               </td>
                               <td>
                                 {" "}
@@ -857,9 +893,11 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_bg_outstanding.bg_expiry_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_bg_outstanding.bg_expiry_date"
+                                  ]
+                                ) || "N/A"}
                               </td>
 
                               <td>
@@ -870,9 +908,11 @@ const TabContent = (props) => {
                               </td>
                               <td>
                                 {" "}
-                                {convertDateToYMD(item[
-                                  "dim_non_funded_bg_outstanding.claim_expiry_date"
-                                ]) || "N/A"}
+                                {convertDateToYMD(
+                                  item[
+                                    "dim_non_funded_bg_outstanding.claim_expiry_date"
+                                  ]
+                                ) || "N/A"}
                               </td>
                             </tr>
                           ))}
@@ -894,55 +934,55 @@ const TabContent = (props) => {
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                       <span className="label">Total No of Loans:</span>
-                      <span className="value">$10,000</span>
+                      {/* <span className="value">$10,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Total Loan Amount:</span>
-                      <span className="value">$2,000</span>
+                      {/* <span className="value">$2,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Total Transaction Limit:</span>
-                      <span className="value">$150</span>
+                      {/* <span className="value">$150</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">
                         Total Outdrawing Power Limit:
                       </span>
-                      <span className="value">50</span>
+                      {/* <span className="value">50</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">
                         Total Outstanding Balance limit:
                       </span>
-                      <span className="value">60</span>
+                      {/* <span className="value">60</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Total Overdue amount:</span>
-                      <span className="value">$5,000</span>
+                      {/* <span className="value">$5,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">
                         Total Principal Overdue amt:
                       </span>
-                      <span className="value">$7,000</span>
+                      {/* <span className="value">$7,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Total Interest Overdue Amt:</span>
-                      <span className="value">$100</span>
+                      {/* <span className="value">$100</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Total Interest Paid:</span>
-                      <span className="value">$5,000</span>
+                      {/* <span className="value">$5,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Total Penal Amount:</span>
-                      <span className="value">$7,000</span>
+                      {/* <span className="value">$7,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">
                         Count of missed installment:
                       </span>
-                      <span className="value">$100</span>
+                      {/* <span className="value">$100</span> */}
                     </li>
                   </ul>
                 </div>

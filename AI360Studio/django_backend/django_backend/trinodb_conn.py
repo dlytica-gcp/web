@@ -4,16 +4,16 @@ from trino.dbapi import connect
 class TrinoDbConnection:
     def __init__(self) -> None:
         conn = connect(
-            # host="dlytica-kube-vm.eastus.cloudapp.azure.com",
-            # port=32553,
-            # user="admin",
-            # catalog="iceberg",
-            # http_scheme='http',
-            host="10.10.157.105",
-            port=30649,
-            user="dlyticauser",
+            host="dlytica-kube-vm.eastus.cloudapp.azure.com",
+            port=32553,
+            user="admin",
             catalog="iceberg",
             http_scheme='http',
+            # host="10.10.157.105",
+            # port=30649,
+            # user="dlyticauser",
+            # catalog="iceberg",
+            # http_scheme='http',
         )
         self.connection = conn
 

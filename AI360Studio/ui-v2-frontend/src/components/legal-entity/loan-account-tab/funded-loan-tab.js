@@ -137,7 +137,8 @@ const TabContent = (props) => {
                           <p>
                             <span>Loan Account Number</span>
                             <span className="value">
-                              {data["dim_gam.acid"] || "N/A"}
+                              {data["dim_loan_accounts_funded.foracid"] ||
+                                "N/A"}
                             </span>
                           </p>
                           <p>
@@ -153,13 +154,13 @@ const TabContent = (props) => {
                                 "N/A"}
                             </span>
                           </p>
-                          <p>
+                          {/* <p>
                             <span>Type</span>
                             <span className="value">
                               {data["dim_loan_accounts_funded.categoryid"] ||
                                 "N/A"}
                             </span>
-                          </p>
+                          </p> */}
                           <p>
                             <span>RA Unit</span>
                             <span className="value">
@@ -168,38 +169,36 @@ const TabContent = (props) => {
                             </span>
                           </p>
                           <p>
-                            <span>glsh code</span>
+                            <span>GLSH code</span>
                             <span className="value">
-                              {data["dim_loan_accounts_funded.groupid_code"] ||
-                                "N/A"}
+                              {data["dim_gam.gl_sub_head_code"] || "N/A"}
                             </span>
                           </p>
                           <p>
                             <span>Account Branch</span>
                             <span className="value">
-                              {data["dim_loan_accounts_funded.group_name"] ||
-                                "N/A"}
+                              {data["dim_branch.branch_description"] || "N/A"}
                             </span>
                           </p>
-                          <p>
+                          {/* <p>
                             <span>Province</span>
                             <span className="value">
                               {data["dim_loan_accounts_funded.sector_code"] ||
                                 "N/A"}
                             </span>
-                          </p>
-                          <p>
+                          </p> */}
+                          {/* <p>
                             <span>Sub Province</span>
                             <span className="value">
                               {data[
                                 "dim_loan_accounts_funded.sub_sector_code"
                               ] || "N/A"}
                             </span>
-                          </p>
+                          </p> */}
                           <p>
                             <span>Customer ID</span>
                             <span className="value">
-                              {data["dim_customers.cif_id"] || "N/A"}
+                              {data["dim_gam.cif_id"] || "N/A"}
                             </span>
                           </p>
                           <p>
@@ -211,7 +210,7 @@ const TabContent = (props) => {
                             </span>
                           </p>
                           <p>
-                            <span>Transanction Limit</span>
+                            <span>sanction Limit</span>
                             <span className="value">
                               {data[
                                 "dim_loan_accounts_funded.sanction_limit"
@@ -225,32 +224,38 @@ const TabContent = (props) => {
                                 "N/A"}
                             </span>
                           </p>
-                          <p>
+                          {/* <p>
                             <span>Outstanding balance</span>
-                            {/* <span className="value">N/A</span> */}
-                          </p>
+                            <span className="value">N/A</span>
+                          </p> */}
                           <p>
                             <span>Limit sanction date</span>
                             <span className="value">
-                              {convertDateToYMD(data[
-                                "dim_loan_accounts_funded.limit_sanction_date"
-                              ]) || "N/A"}
+                              {convertDateToYMD(
+                                data[
+                                  "dim_loan_accounts_funded.limit_sanction_date"
+                                ]
+                              ) || "N/A"}
                             </span>
                           </p>
                           <p>
                             <span>Limit Expiry date</span>
                             <span className="value">
-                              {convertDateToYMD(data[
-                                "dim_loan_accounts_funded.limit_expiry_date"
-                              ]) || "N/A"}
+                              {convertDateToYMD(
+                                data[
+                                  "dim_loan_accounts_funded.limit_expiry_date"
+                                ]
+                              ) || "N/A"}
                             </span>
                           </p>
                           <p>
                             <span>Review Date</span>
                             <span className="value">
-                              {convertDateToYMD(data[
-                                "dim_loan_accounts_funded.limit_review_date"
-                              ]) || "N/A"}
+                              {convertDateToYMD(
+                                data[
+                                  "dim_loan_accounts_funded.limit_review_date"
+                                ]
+                              ) || "N/A"}
                             </span>
                           </p>
                           <p>
@@ -278,45 +283,113 @@ const TabContent = (props) => {
                           </p>
                           <p>
                             <span>Customer Group</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {data[
+                                "dim_loan_accounts_funded.customer_group"
+                              ] || "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Group Code</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.group_code"] ||
+                                "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Group ID</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {" "}
+                              {data["dim_loan_accounts_funded.group_id"] ||
+                                "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Accrued Interest</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {data[
+                                "dim_loan_accounts_funded.accrued_interest"
+                              ] || "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Scheme Code</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {data["dim_product.product_scheme_code"] || "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Overdue amt</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {data[
+                                "dim_loan_accounts_funded.overdue_amount"
+                              ] || "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Full Rate</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.full_rate"] ||
+                                "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Base Rate</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.base_rate"] ||
+                                "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Preference Rate</span>
-                            {/* <span className="value">N/A</span> */}
+                            <span className="value">
+                              {data[
+                                "dim_loan_accounts_funded.preference_rate"
+                              ] || "N/A"}
+                            </span>
                           </p>
                           <p>
                             <span>Currency</span>
                             <span className="value">
                               {data["dim_loan_accounts_funded.currency"] ||
                                 "N/A"}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Risk grade</span>
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.riskgrade"] ||
+                                "N/A"}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Internal Risk grade</span>
+                            <span className="value">
+                              {data[
+                                "dim_loan_accounts_funded.internal_riskgrade"
+                              ] || "N/A"}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Base L2</span>
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.base_l2"] ||
+                                "N/A"}
+                            </span>
+                          </p>
+                          <p>
+                            <span>EMI Flag</span>
+                            <span className="value">
+                              {data["dim_loan_accounts_funded.emi_flag"] ||
+                                "N/A"}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Operative Account</span>
+                            <span className="value">
+                              {data[
+                                "dim_loan_accounts_funded.operative_account"
+                              ] || "N/A"}
                             </span>
                           </p>
                         </div>
@@ -334,47 +407,100 @@ const TabContent = (props) => {
                           <div className="card basic-card">
                             <p>
                               <span>
-                                Days Between Account Opening and Loan Transaction
-
+                                Days Between Account Opening and Loan
+                                Transaction
                               </span>
-                              <span className="value"> {data["dim_loan_accounts_funded.days_between_account_opening_and_loan_sanction"] ? data["dim_loan_accounts_funded.days_between_account_opening_and_loan_sanction"] + " days" :
-                                "N/A"}</span>
+                              <span className="value">
+                                {" "}
+                                {data[
+                                  "dim_loan_accounts_funded.days_between_account_opening_and_loan_sanction"
+                                ]
+                                  ? data[
+                                      "dim_loan_accounts_funded.days_between_account_opening_and_loan_sanction"
+                                    ] + " days"
+                                  : "N/A"}
+                              </span>
                             </p>
                             <p>
                               <span>Limit Expiry days In</span>
-                              <span className="value"> {data["dim_loan_accounts_funded.limit_expiry_days_in"] ? data["dim_loan_accounts_funded.limit_expiry_days_in"] + " days" :
-                                "N/A"}</span>
-                            </p>
-                            <p>
-                              <span>Days Since Last Renewal</span>
-                              {/* <span className="value">365</span> */}
-                            </p>
-                            <p>
-                              <span>
-                                Next Interest Demand Remaining Date in
+                              <span className="value">
+                                {" "}
+                                {data[
+                                  "dim_loan_accounts_funded.limit_expiry_days_in"
+                                ]
+                                  ? data[
+                                      "dim_loan_accounts_funded.limit_expiry_days_in"
+                                    ] + " days"
+                                  : "N/A"}
                               </span>
-                              {/* <span className="value">30</span> */}
-                            </p>
-                            <p>
-                              <span>Next Principal Demand In</span>
-                              {/* <span className="value">60</span> */}
                             </p>
                             <p>
                               <span>Limit Review days In</span>
-                              <span className="value"> {data["dim_loan_accounts_funded.limit_review_days_in"] ? data["dim_loan_accounts_funded.limit_review_days_in"] + " days" :
-                                "N/A"}</span>
+                              <span className="value">
+                                {" "}
+                                {data[
+                                  "dim_loan_accounts_funded.limit_review_days_in"
+                                ]
+                                  ? data[
+                                      "dim_loan_accounts_funded.limit_review_days_in"
+                                    ] + " days"
+                                  : "N/A"}
+                              </span>
+                            </p>
+                            {/* <p>
+                              <span>Days Since Last Renewal</span>
+                              <span className="value">365</span>
+                            </p> */}
+                            <p>
+                              <span>Next Interest Demand in</span>
+                              <span className="value">
+                                {data[
+                                  "dim_loan_accounts_funded.next_interest_demand_in"
+                                ]
+                                  ? data[
+                                      "dim_loan_accounts_funded.next_interest_demand_in"
+                                    ] + " days"
+                                  : "N/A"}
+                              </span>
                             </p>
                             <p>
+                              <span>Next Principal Demand In</span>
+                              <span className="value">
+                                {data[
+                                  "dim_loan_accounts_funded.next_principal_demand_in"
+                                ]
+                                  ? data[
+                                      "dim_loan_accounts_funded.next_principal_demand_in"
+                                    ] + " days"
+                                  : "N/A"}
+                              </span>
+                            </p>
+                            {/* <p>
+                              <span>Limit Review days In</span>
+                              <span className="value"> {data["dim_loan_accounts_funded.limit_review_days_in"] ? data["dim_loan_accounts_funded.limit_review_days_in"] + " days" :
+                                "N/A"}</span>
+                            </p> */}
+                            <p>
                               <span>Days Since First Overdue Loan Amount</span>
-                              {/* <span className="value">45</span> */}
+                              <span className="value">
+                                {data[
+                                  "dim_loan_accounts_funded.days_since_first_overdue_loan_amount"
+                                ]
+                                  ? data[
+                                      "dim_loan_accounts_funded.days_since_first_overdue_loan_amount"
+                                    ] + " days"
+                                  : "N/A"}
+                              </span>
                             </p>
                             <p>
                               <span>Days Past Dues</span>
-                              {/* <span className="value">15</span> */}
-                            </p>
-                            <p>
-                              <span>Installment Delay Days</span>
-                              {/* <span className="value">10</span> */}
+                              <span className="value">
+                                {data["dim_loan_accounts_funded.days_past_due"]
+                                  ? data[
+                                      "dim_loan_accounts_funded.days_past_due"
+                                    ] + " days"
+                                  : "N/A"}
+                              </span>
                             </p>
                           </div>
                         </div>

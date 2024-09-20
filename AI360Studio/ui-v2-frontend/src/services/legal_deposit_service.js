@@ -38,8 +38,7 @@ const legalDepositFetchData = {
       },
       {
         headers: {
-          Authorization:
-            process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
+          Authorization: process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
         },
       }
     );
@@ -81,8 +80,7 @@ const legalDepositFetchData = {
       },
       {
         headers: {
-          Authorization:
-            process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
+          Authorization: process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
         },
       }
     );
@@ -101,6 +99,10 @@ const legalDepositFetchData = {
             "dim_gam.acct_opn_date",
             "dim_gam.acct_cls_flg",
             "dim_gam.foracid",
+            "dim_gam.account_status",
+            "dim_gam.last_transaction_date",
+            "dim_gam.last_digital_transaction_date",
+            "dim_gam.last_branch_transaction_date",
             "dim_product.product_scheme_description",
             "dim_deposit_accounts.freeze_status",
             "dim_deposit_accounts.freeze_code",
@@ -119,7 +121,15 @@ const legalDepositFetchData = {
             "dim_deposit_accounts.days_since_dormant",
             "dim_deposit_accounts.days_since_last_unfreeze",
             "dim_customers.account_relationship_days",
-            // "fact_transaction_details.tran_date_timestamp",
+            "dim_deposit_accounts.days_since_first_customer_induced_transaction",
+            "dim_gam.acct_name",
+            "dim_deposit_accounts.minimum_balance",
+            "dim_deposit_accounts.available_amount",
+            "dim_branch.branch_description",
+            // "dim_deposit_accounts.foracid",
+            "dim_gam.account_balance",
+            "dim_gam.interest_rate",
+            "dim_gam.lien_amt",
           ],
           order: {
             "dim_gam.last_digital_transaction_date": "desc",
@@ -133,7 +143,11 @@ const legalDepositFetchData = {
           //   "fact_transaction_details.last_transaction_date",
           // ],
           filters: [
-            { member: "dim_gam.foracid", operator: "equals", values: [foracid] },
+            {
+              member: "dim_gam.foracid",
+              operator: "equals",
+              values: [foracid],
+            },
             {
               member: "dim_customers.cif_id",
               operator: "equals",
@@ -142,17 +156,17 @@ const legalDepositFetchData = {
             {
               member: "dim_customers.cust_type",
               operator: "equals",
-              values: ["LEGAL"]
+              values: ["LEGAL"],
             },
             {
               member: "dim_product.product_scheme_category",
               operator: "equals",
-              values: ["Deposit"]
+              values: ["Deposit"],
             },
             {
               member: "dim_product.product_scheme_sub_category",
               operator: "equals",
-              values: [sub_cat]
+              values: [sub_cat],
             },
           ],
           // limit: 1,
@@ -184,7 +198,7 @@ const legalDepositFetchData = {
             "dim_gam.acid",
             "dim_deposit_accounts.available_amount",
             "dim_deposit_accounts.minimum_balance",
-            "dim_gam.acid",
+          
             "dim_gam.foracid",
             "dim_customers.cif_id",
           ],
@@ -203,8 +217,7 @@ const legalDepositFetchData = {
 
       {
         headers: {
-          Authorization:
-            process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
+          Authorization: process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
         },
       }
     );
@@ -231,8 +244,7 @@ const legalDepositFetchData = {
 
       {
         headers: {
-          Authorization:
-            process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
+          Authorization: process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
         },
       }
     );
@@ -245,7 +257,11 @@ const legalDepositFetchData = {
       {
         query: {
           filters: [
-            { member: "dim_interest_rate.foracid", operator: "equals", values: [id] },
+            {
+              member: "dim_interest_rate.foracid",
+              operator: "equals",
+              values: [id],
+            },
           ],
           dimensions: [
             "dim_interest_rate.start_date",
@@ -257,8 +273,7 @@ const legalDepositFetchData = {
 
       {
         headers: {
-          Authorization:
-            process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
+          Authorization: process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
         },
       }
     );
@@ -283,8 +298,7 @@ const legalDepositFetchData = {
       },
       {
         headers: {
-          Authorization:
-            process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
+          Authorization: process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
         },
       }
     );
@@ -297,7 +311,11 @@ const legalDepositFetchData = {
       {
         query: {
           filters: [
-            { member: "dim_signatories.foracid", operator: "equals", values: [id] },
+            {
+              member: "dim_signatories.foracid",
+              operator: "equals",
+              values: [id],
+            },
           ],
           dimensions: [
             "dim_signatories.signatory_name",
@@ -308,8 +326,7 @@ const legalDepositFetchData = {
       },
       {
         headers: {
-          Authorization:
-            process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
+          Authorization: process.env.NEXT_PUBLIC_CUBE_API_TOKEN,
         },
       }
     );

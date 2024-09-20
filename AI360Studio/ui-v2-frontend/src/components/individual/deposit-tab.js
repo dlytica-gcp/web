@@ -1,6 +1,6 @@
 // components/TabContent.js
 import Link from "next/link";
-import { useEffect, useState,useRef,useCallback } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { renderCharts } from "../charts/individual-chart";
@@ -17,63 +17,66 @@ const TabContent = (props) => {
   const [depositDataSaving, setDepositDataSaving] = useState([]);
   const [depositDataFixed, setDepositDataFixed] = useState([]);
 
-  const fetchData = useCallback(async (id) => {
-    try {
-      // Fetch the individual data
-      const result = await depositFetchData.getdeposit_details(id);
+  const fetchData = useCallback(
+    async (id) => {
+      try {
+        // Fetch the individual data
+        const result = await depositFetchData.getdeposit_details(id);
 
-      const depositDataSavings = result.filter(
-        (item) =>
-          item["dim_product.product_scheme_category"] === "Deposit" &&
-          item["dim_product.product_scheme_sub_category"] === "Savings"
-      );
-      const depositDataFixed = result.filter(
-        (item) =>
-          item["dim_product.product_scheme_category"] === "Deposit" &&
-          item["dim_product.product_scheme_sub_category"] === "Fixed"
-      );
+        const depositDataSavings = result.filter(
+          (item) =>
+            item["dim_product.product_scheme_category"] === "Deposit" &&
+            item["dim_product.product_scheme_sub_category"] === "Savings"
+        );
+        const depositDataFixed = result.filter(
+          (item) =>
+            item["dim_product.product_scheme_category"] === "Deposit" &&
+            item["dim_product.product_scheme_sub_category"] === "Fixed"
+        );
 
-      // TODO: needs to be kept in respective components
-      // const depositDataFixed = result.filter(
-      //   (item) =>
-      //     item["dim_product.product_scheme_category"] === "Deposit" &&
-      //     item["dim_product.product_scheme_sub_category"] === "Fixed"
-      // );
-      // const LoanData = result.filter(
-      //   (item) => item["dim_product.product_scheme_category"] === "Loan"
-      // );
-      // Extract data for Deposit
+        // TODO: needs to be kept in respective components
+        // const depositDataFixed = result.filter(
+        //   (item) =>
+        //     item["dim_product.product_scheme_category"] === "Deposit" &&
+        //     item["dim_product.product_scheme_sub_category"] === "Fixed"
+        // );
+        // const LoanData = result.filter(
+        //   (item) => item["dim_product.product_scheme_category"] === "Loan"
+        // );
+        // Extract data for Deposit
 
-      // TODO: Extract data for Loan
-      // const loanLabels = LoanData.map(
-      //   (item) => item["fact_transactions.tran_date_date_part"]
-      // );
-      // const loanDebitTransVol = LoanData.map(
-      //   (item) => item["fact_transactions.total_debit_tran_vol"]
-      // );
-      // const loanDebitTransCount = LoanData.map(
-      //   (item) => item["fact_transactions.total_debit_tran_count"]
-      // );
-      // const loanCreditTransCount = LoanData.map(
-      //   (item) => item["fact_transactions.total_credit_tran_count"]
-      // );
-      // const loanCreditTransVol = LoanData.map(
-      //   (item) => item["fact_transactions.total_credit_tran_vol"]
-      // );
-      setDepositDataSaving(depositDataSavings);
-      setDepositDataFixed(depositDataFixed);
-    } catch (error) {
-      console.error("Error fetching saving deposit data:", error);
-    } finally {
-      setLoading(false);
-    }
-  },[inv_id]);
+        // TODO: Extract data for Loan
+        // const loanLabels = LoanData.map(
+        //   (item) => item["fact_transactions.tran_date_date_part"]
+        // );
+        // const loanDebitTransVol = LoanData.map(
+        //   (item) => item["fact_transactions.total_debit_tran_vol"]
+        // );
+        // const loanDebitTransCount = LoanData.map(
+        //   (item) => item["fact_transactions.total_debit_tran_count"]
+        // );
+        // const loanCreditTransCount = LoanData.map(
+        //   (item) => item["fact_transactions.total_credit_tran_count"]
+        // );
+        // const loanCreditTransVol = LoanData.map(
+        //   (item) => item["fact_transactions.total_credit_tran_vol"]
+        // );
+        setDepositDataSaving(depositDataSavings);
+        setDepositDataFixed(depositDataFixed);
+      } catch (error) {
+        console.error("Error fetching saving deposit data:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [inv_id]
+  );
   useEffect(() => {
     // if (!hasFetched.current) {
-      fetchData(inv_id);
-      // hasFetched.current = true
+    fetchData(inv_id);
+    // hasFetched.current = true
     // }
-  }, [inv_id,fetchData]);
+  }, [inv_id, fetchData]);
 
   // Fetch data from the API
   // const fetchData = async () => {
@@ -174,40 +177,40 @@ const TabContent = (props) => {
                   <div className="basic-card card">
                     <p>
                       <span>Total Deposit: </span>
-                      <span className="value">$10,000</span>
+                      {/* <span className="value">$10,000</span> */}
                     </p>
                     <p>
                       <span>Average Deposit: </span>
-                      <span className="value">$2,000</span>
+                      {/* <span className="value">$2,000</span> */}
                     </p>
-                    <p>
+                    {/* <p>
                       <span>Interest Paid: </span>
                       <span className="value">$150</span>
-                    </p>
+                    </p> */}
                     <p>
                       <span>No. of DR transactions YTD: </span>
-                      <span className="value">50</span>
+                      {/* <span className="value">50</span> */}
                     </p>
                     <p>
                       <span>No. of CR transactions YTD: </span>
-                      <span className="value">60</span>
+                      {/* <span className="value">60</span> */}
                     </p>
                     <p>
                       <span>Amount of DR Transactions YTD: </span>
-                      <span className="value">$5,000</span>
+                      {/* <span className="value">$5,000</span> */}
                     </p>
-                    <p>
+                    {/* <p>
                       <span>Employment Status: </span>
                       <span className="value">Employed</span>
-                    </p>
+                    </p> */}
                     <p>
                       <span>CR Transaction Amount: </span>
-                      <span className="value">$7,000</span>
+                      {/* <span className="value">$7,000</span> */}
                     </p>
-                    <p>
+                    {/* <p>
                       <span>Fees and Commissions: </span>
                       <span className="value">$100</span>
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -218,13 +221,11 @@ const TabContent = (props) => {
                     <div className="basic-card card">
                       <p>
                         <span>Total Deposit :</span>
-                        <span className="value"> 100000</span>
+                        {/* <span className="value"> 100000</span> */}
                       </p>
                       <p>
                         <span>Average Deposit :</span>
-                        <span className="value">
-                          100000<span className="value"></span>
-                        </span>
+                        {/* <span className="value">100000</span> */}
                       </p>
                     </div>
                   </div>
@@ -259,46 +260,53 @@ const TabContent = (props) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {depositDataSaving && depositDataSaving?.map((item, index) => (
-                          <tr key={index}>
-                            <td>
-                              <Link
-                                href={`/individuals/deposit-account/saving-deposit?foracid=${item["dim_gam.foracid"]}&cif_id=${item["dim_customers.cif_id"]}`}
-                              >
-                                {item["dim_gam.foracid"]}
-                              </Link>
-                            </td>
-                            <td>
-                              {convertDateToYMD(item["dim_gam.acct_opn_date_date_part"]) || "N/A"}
-                            </td>
-                            <td className="d-none d-md-table-cell">
-                              {item["dim_product.product_scheme_type"] || "N/A"}
-                            </td>
-                            <td>
-                              {item["dim_product.product_scheme_code"] || "N/A"}
-                            </td>
-                            <td>
-                              {item["dim_product.product_scheme_description"] ||
-                                "N/A"}
-                            </td>
-                            <td>no data</td>
-                            <td>
-                              $
-                              {item["dim_deposit_accounts.available_amount"] ||
-                                "0.00"}
-                            </td>
-                            <td>
-                              $
-                              {item["dim_deposit_accounts.minimum_balance"] ||
-                                "0.00"}
-                            </td>
-                            <td>
-                              {item["dim_gam.acct_cls_flg"] === "Y"
-                                ? "Closed"
-                                : "Active"}
-                            </td>
-                          </tr>
-                        ))}
+                        {depositDataSaving &&
+                          depositDataSaving?.map((item, index) => (
+                            <tr key={index}>
+                              <td>
+                                <Link
+                                  href={`/individuals/deposit-account/saving-deposit?foracid=${item["dim_gam.foracid"]}&cif_id=${item["dim_customers.cif_id"]}`}
+                                >
+                                  {item["dim_gam.foracid"]}
+                                </Link>
+                              </td>
+                              <td>
+                                {convertDateToYMD(
+                                  item["dim_gam.acct_opn_date_date_part"]
+                                ) || "N/A"}
+                              </td>
+                              <td className="d-none d-md-table-cell">
+                                {item["dim_product.product_scheme_type"] ||
+                                  "N/A"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_code"] ||
+                                  "N/A"}
+                              </td>
+                              <td>
+                                {item[
+                                  "dim_product.product_scheme_description"
+                                ] || "N/A"}
+                              </td>
+                              <td>no data</td>
+                              <td>
+                                $
+                                {item[
+                                  "dim_deposit_accounts.available_amount"
+                                ] || "0.00"}
+                              </td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.minimum_balance"] ||
+                                  "0.00"}
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_cls_flg"] === "Y"
+                                  ? "Closed"
+                                  : "Active"}
+                              </td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
                   </div>
@@ -326,61 +334,316 @@ const TabContent = (props) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {depositDataFixed && depositDataFixed?.map((item, index) => (
-                          <tr key={index}>
-                            <td>
-                              <Link
-                                href={`/individuals/deposit-account/fixed-deposit?foracid=${item["dim_gam.foracid"]}&cif_id=${item["dim_customers.cif_id"]}`}
-                              >
-                                {item["dim_gam.foracid"]
-                                  ? item["dim_gam.foracid"]
+                        {depositDataFixed &&
+                          depositDataFixed?.map((item, index) => (
+                            <tr key={index}>
+                              <td>
+                                <Link
+                                  href={`/individuals/deposit-account/fixed-deposit?foracid=${item["dim_gam.foracid"]}&cif_id=${item["dim_customers.cif_id"]}`}
+                                >
+                                  {item["dim_gam.foracid"]
+                                    ? item["dim_gam.foracid"]
+                                    : "No data"}
+                                </Link>
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_opn_date_date_part"]
+                                  ? convertDateToYMD(
+                                      item["dim_gam.acct_opn_date_date_part"]
+                                    )
                                   : "No data"}
-                              </Link>
-                            </td>
-                            <td>
-                              {item["dim_gam.acct_opn_date_date_part"]
-                                ?  convertDateToYMD(item["dim_gam.acct_opn_date_date_part"])
-                                : "No data"}
-                            </td>
-                            <td className="d-none d-md-table-cell">
-                              {item["dim_product.product_scheme_type"]
-                                ? item["dim_product.product_scheme_type"]
-                                : "No data"}
-                            </td>
-                            <td>
-                              {item["dim_product.product_scheme_code"]
-                                ? item["dim_product.product_scheme_code"]
-                                : "No data"}
-                            </td>
-                            <td>
-                              {item["dim_product.product_scheme_description"]
-                                ? item["dim_product.product_scheme_description"]
-                                : "No data"}
-                            </td>
-                            <td>No data</td>
-                            <td>
-                              $
-                              {item["dim_deposit_accounts.available_amount"]
-                                ? item["dim_deposit_accounts.available_amount"]
-                                : "0.00"}
-                            </td>
-                            <td>
-                              $
-                              {item["dim_deposit_accounts.minimum_balance"]
-                                ? item["dim_deposit_accounts.minimum_balance"]
-                                : "0.00"}
-                            </td>
-                            <td>
-                              {item["dim_gam.acct_cls_flg"] === "Y"
-                                ? "Closed"
-                                : "Active"}
-                            </td>
-                          </tr>
-                        ))}
+                              </td>
+                              <td className="d-none d-md-table-cell">
+                                {item["dim_product.product_scheme_type"]
+                                  ? item["dim_product.product_scheme_type"]
+                                  : "No data"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_code"]
+                                  ? item["dim_product.product_scheme_code"]
+                                  : "No data"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_description"]
+                                  ? item[
+                                      "dim_product.product_scheme_description"
+                                    ]
+                                  : "No data"}
+                              </td>
+                              <td>No data</td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.available_amount"]
+                                  ? item[
+                                      "dim_deposit_accounts.available_amount"
+                                    ]
+                                  : "0.00"}
+                              </td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.minimum_balance"]
+                                  ? item["dim_deposit_accounts.minimum_balance"]
+                                  : "0.00"}
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_cls_flg"] === "Y"
+                                  ? "Closed"
+                                  : "Active"}
+                              </td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
                   </div>
                 </div>
+                {/* <div className="card">
+                  <div className="card-header">
+                    <h5 className="card-title">Current</h5>
+                  </div>
+                  <div className="table-scrollable">
+                    <table className="table table-sm">
+                      <thead>
+                        <tr>
+                          <th>Account No</th>
+                          <th>Account Open Date</th>
+                          <th className="d-none d-md-table-cell">
+                            Scheme Type
+                          </th>
+                          <th>Scheme Code</th>
+                          <th>Scheme Desc</th>
+                          <th>Current Balance</th>
+
+                          <th>Account Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {depositDataFixed &&
+                          depositDataFixed?.map((item, index) => (
+                            <tr key={index}>
+                              <td>
+                                <Link
+                                  href={`/individuals/deposit-account/fixed-deposit?foracid=${item["dim_gam.foracid"]}&cif_id=${item["dim_customers.cif_id"]}`}
+                                >
+                                  {item["dim_gam.foracid"]
+                                    ? item["dim_gam.foracid"]
+                                    : "No data"}
+                                </Link>
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_opn_date_date_part"]
+                                  ? convertDateToYMD(
+                                      item["dim_gam.acct_opn_date_date_part"]
+                                    )
+                                  : "No data"}
+                              </td>
+                              <td className="d-none d-md-table-cell">
+                                {item["dim_product.product_scheme_type"]
+                                  ? item["dim_product.product_scheme_type"]
+                                  : "No data"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_code"]
+                                  ? item["dim_product.product_scheme_code"]
+                                  : "No data"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_description"]
+                                  ? item[
+                                      "dim_product.product_scheme_description"
+                                    ]
+                                  : "No data"}
+                              </td>
+                              <td>No data</td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.available_amount"]
+                                  ? item[
+                                      "dim_deposit_accounts.available_amount"
+                                    ]
+                                  : "0.00"}
+                              </td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.minimum_balance"]
+                                  ? item["dim_deposit_accounts.minimum_balance"]
+                                  : "0.00"}
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_cls_flg"] === "Y"
+                                  ? "Closed"
+                                  : "Active"}
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div> */}
+                {/* <div className="card">
+                  <div className="card-header">
+                    <h5 className="card-title">Call</h5>
+                  </div>
+                  <div className="table-scrollable">
+                    <table className="table table-sm">
+                      <thead>
+                        <tr>
+                          <th>Account No</th>
+                          <th>Account Open Date</th>
+                          <th className="d-none d-md-table-cell">
+                            Scheme Type
+                          </th>
+                          <th>Scheme Code</th>
+                          <th>Scheme Desc</th>
+                          <th>Current Balance</th>
+                          <th>Account Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {depositDataFixed &&
+                          depositDataFixed?.map((item, index) => (
+                            <tr key={index}>
+                              <td>
+                                <Link
+                                  href={`/individuals/deposit-account/fixed-deposit?foracid=${item["dim_gam.foracid"]}&cif_id=${item["dim_customers.cif_id"]}`}
+                                >
+                                  {item["dim_gam.foracid"]
+                                    ? item["dim_gam.foracid"]
+                                    : "No data"}
+                                </Link>
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_opn_date_date_part"]
+                                  ? convertDateToYMD(
+                                      item["dim_gam.acct_opn_date_date_part"]
+                                    )
+                                  : "No data"}
+                              </td>
+                              <td className="d-none d-md-table-cell">
+                                {item["dim_product.product_scheme_type"]
+                                  ? item["dim_product.product_scheme_type"]
+                                  : "No data"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_code"]
+                                  ? item["dim_product.product_scheme_code"]
+                                  : "No data"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_description"]
+                                  ? item[
+                                      "dim_product.product_scheme_description"
+                                    ]
+                                  : "No data"}
+                              </td>
+                              <td>No data</td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.available_amount"]
+                                  ? item[
+                                      "dim_deposit_accounts.available_amount"
+                                    ]
+                                  : "0.00"}
+                              </td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.minimum_balance"]
+                                  ? item["dim_deposit_accounts.minimum_balance"]
+                                  : "0.00"}
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_cls_flg"] === "Y"
+                                  ? "Closed"
+                                  : "Active"}
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div> */}
+                {/* <div className="card">
+                  <div className="card-header">
+                    <h5 className="card-title">Margin</h5>
+                  </div>
+                  <div className="table-scrollable">
+                    <table className="table table-sm">
+                      <thead>
+                        <tr>
+                          <th>Account No</th>
+                          <th>Account Open Date</th>
+                          <th className="d-none d-md-table-cell">
+                            Scheme Type
+                          </th>
+                          <th>Scheme Code</th>
+                          <th>Scheme Desc</th>
+                          <th>Current Balance</th>
+
+                          <th>Account Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {depositDataFixed &&
+                          depositDataFixed?.map((item, index) => (
+                            <tr key={index}>
+                              <td>
+                                <Link
+                                  href={`/individuals/deposit-account/fixed-deposit?foracid=${item["dim_gam.foracid"]}&cif_id=${item["dim_customers.cif_id"]}`}
+                                >
+                                  {item["dim_gam.foracid"]
+                                    ? item["dim_gam.foracid"]
+                                    : "No data"}
+                                </Link>
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_opn_date_date_part"]
+                                  ? convertDateToYMD(
+                                      item["dim_gam.acct_opn_date_date_part"]
+                                    )
+                                  : "No data"}
+                              </td>
+                              <td className="d-none d-md-table-cell">
+                                {item["dim_product.product_scheme_type"]
+                                  ? item["dim_product.product_scheme_type"]
+                                  : "No data"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_code"]
+                                  ? item["dim_product.product_scheme_code"]
+                                  : "No data"}
+                              </td>
+                              <td>
+                                {item["dim_product.product_scheme_description"]
+                                  ? item[
+                                      "dim_product.product_scheme_description"
+                                    ]
+                                  : "No data"}
+                              </td>
+                              <td>No data</td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.available_amount"]
+                                  ? item[
+                                      "dim_deposit_accounts.available_amount"
+                                    ]
+                                  : "0.00"}
+                              </td>
+                              <td>
+                                $
+                                {item["dim_deposit_accounts.minimum_balance"]
+                                  ? item["dim_deposit_accounts.minimum_balance"]
+                                  : "0.00"}
+                              </td>
+                              <td>
+                                {item["dim_gam.acct_cls_flg"] === "Y"
+                                  ? "Closed"
+                                  : "Active"}
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -395,35 +658,35 @@ const TabContent = (props) => {
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                       <span className="label">Total Deposit:</span>
-                      <span className="value">$10,000</span>
+                      {/* <span className="value">$10,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Average Deposit:</span>
-                      <span className="value">$2,000</span>
+                      {/* <span className="value">$2,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Interest Paid:</span>
-                      <span className="value">$150</span>
+                      {/* <span className="value">$150</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">No of DR Transactions:</span>
-                      <span className="value">50</span>
+                      {/* <span className="value">50</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">No of CR Transactions:</span>
-                      <span className="value">60</span>
+                      {/* <span className="value">60</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Amount of DR transactions:</span>
-                      <span className="value">$5,000</span>
+                      {/* <span className="value">$5,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">CR transaction amount:</span>
-                      <span className="value">$7,000</span>
+                      {/* <span className="value">$7,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Fees and Commissions:</span>
-                      <span className="value">$100</span>
+                      {/* <span className="value">$100</span> */}
                     </li>
                   </ul>
                 </div>
@@ -434,35 +697,35 @@ const TabContent = (props) => {
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                       <span className="label">Total Deposit:</span>
-                      <span className="value">$10,000</span>
+                      {/* <span className="value">$10,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Average Deposit:</span>
-                      <span className="value">$2,000</span>
+                      {/* <span className="value">$2,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Interest Paid:</span>
-                      <span className="value">$150</span>
+                      {/* <span className="value">$150</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">No of DR Transactions:</span>
-                      <span className="value">50</span>
+                      {/* <span className="value">50</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">No of CR Transactions:</span>
-                      <span className="value">60</span>
+                      {/* <span className="value">60</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Amount of DR transactions:</span>
-                      <span className="value">$5,000</span>
+                      {/* <span className="value">$5,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">CR transaction amount:</span>
-                      <span className="value">$7,000</span>
+                      {/* <span className="value">$7,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Fees and Commissions:</span>
-                      <span className="value">$100</span>
+                      {/* <span className="value">$100</span> */}
                     </li>
                   </ul>
                 </div>
@@ -473,35 +736,35 @@ const TabContent = (props) => {
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                       <span className="label">Total Deposit:</span>
-                      <span className="value">$10,000</span>
+                      {/* <span className="value">$10,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Average Deposit:</span>
-                      <span className="value">$2,000</span>
+                      {/* <span className="value">$2,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Interest Paid:</span>
-                      <span className="value">$150</span>
+                      {/* <span className="value">$150</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">No of DR Transactions:</span>
-                      <span className="value">50</span>
+                      {/* <span className="value">50</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">No of CR Transactions:</span>
-                      <span className="value">60</span>
+                      {/* <span className="value">60</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Amount of DR transactions:</span>
-                      <span className="value">$5,000</span>
+                      {/* <span className="value">$5,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">CR transaction amount:</span>
-                      <span className="value">$7,000</span>
+                      {/* <span className="value">$7,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Fees and Commissions:</span>
-                      <span className="value">$100</span>
+                      {/* <span className="value">$100</span> */}
                     </li>
                   </ul>
                 </div>
@@ -514,31 +777,31 @@ const TabContent = (props) => {
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                       <span className="label">Total Deposit:</span>
-                      <span className="value">$10,000</span>
+                      {/* <span className="value">$10,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Average Deposit:</span>
-                      <span className="value">$2,000</span>
+                      {/* <span className="value">$2,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Interest Paid:</span>
-                      <span className="value">$150</span>
+                      {/* <span className="value">$150</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">No of DR Transactions:</span>
-                      <span className="value">50</span>
+                      {/* <span className="value">50</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">No of CR Transactions:</span>
-                      <span className="value">60</span>
+                      {/* <span className="value">60</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Amount of DR transactions:</span>
-                      <span className="value">$5,000</span>
+                      {/* <span className="value">$5,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">CR transaction amount:</span>
-                      <span className="value">$7,000</span>
+                      {/* <span className="value">$7,000</span> */}
                     </li>
                     <li className="list-group-item">
                       <span className="label">Fees and Commissions:</span>

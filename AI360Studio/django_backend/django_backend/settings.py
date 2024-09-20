@@ -86,20 +86,20 @@ WSGI_APPLICATION = 'django_backend.wsgi.application'
 DATABASES = {
     'default': {
         # for local system
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'dn_ai360_db',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'postgres',
-        # 'HOST': 'dlytica-kube-vm.eastus.cloudapp.azure.com',
-        # 'PORT': '30147',
-
-        # for nica vm
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dn_ai360_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': '10.10.157.105',
-        'PORT': '30100',
+        'HOST': 'dlytica-kube-vm.eastus.cloudapp.azure.com',
+        'PORT': '30147',
+
+        # for nica vm
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'dn_ai360_db',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'postgres',
+        # 'HOST': '10.10.157.105',
+        # 'PORT': '30100',
     }
 }
 
@@ -146,7 +146,7 @@ AUTH_USER_MODEL = 'authentication.CustomUser'
 
 # cross origin allowed
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", "https://v3-ai360studio.dlytica.com", "http://10.10.157.105:32010","http://10.10.157.105:30088"
+    "http://localhost:3000", "http://localhost:32010", "https://v3-ai360studio.dlytica.com", "http://10.10.157.105:32010","http://10.10.157.105:30088"
 ]
 
 # CORS_ALLOW_METHODS = [

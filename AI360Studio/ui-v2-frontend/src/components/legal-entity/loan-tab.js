@@ -161,50 +161,41 @@ const TabContent = (props) => {
               <div className="row">
                 <div className="col-md-12 mb-4">
                   <div className="card basic-card">
+                    
                     <p>
-                      <span>Total No of Loans :</span>
-                      <span className="value">100</span>
-                    </p>
-                    <p>
-                      <span>Total Loan Amount :</span>
+                      <span>Total No of Funded Loan :</span>
                       <span className="value">$1,000,000</span>
                     </p>
                     <p>
-                      <span>Total Transaction Limit :</span>
+                      <span>Total Sanction Limit :</span>
                       <span className="value">$2,500,000</span>
                     </p>
                     <p>
                       <span>Total Outdrawing Power Limit :</span>
                       <span className="value">$500,000</span>
                     </p>
-                    <p>
-                      <span>Total Outstanding Balance limit:</span>
-                      <span className="value">$750,000</span>
-                    </p>
+                    
                     <p>
                       <span>Total Overdue amount:</span>
                       <span className="value">$50,000</span>
                     </p>
-                    <p>
-                      <span>Total Principal Overdue amt:</span>
-                      <span className="value">$30,000</span>
-                    </p>
-                    <p>
+                    
+                    {/* <p>
                       <span>Total Interest Overdue Amt:</span>
                       <span className="value">$20,000</span>
-                    </p>
-                    <p>
+                    </p> */}
+                    {/* <p>
                       <span>Total Interest Paid:</span>
                       <span className="value">$100,000</span>
-                    </p>
-                    <p>
+                    </p> */}
+                    {/* <p>
                       <span>Total Penal Amount:</span>
                       <span className="value">$5,000</span>
-                    </p>
-                    <p>
+                    </p> */}
+                    {/* <p>
                       <span>Count of missed installment:</span>
                       <span className="value">10</span>
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>

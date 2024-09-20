@@ -114,7 +114,6 @@ const depositFetchData = {
             "dim_deposit_accounts.dormant_date",
             "dim_product.product_scheme_sub_category",
             "dim_product.product_scheme_category",
-            // "fact_transaction_details.cif_id",
             "dim_gam.days_since_last_customer_induced_transaction",
             "dim_gam.days_since_last_digital_transaction",
             "dim_gam.days_since_last_branch_transaction",
@@ -123,8 +122,14 @@ const depositFetchData = {
             "dim_deposit_accounts.days_since_last_unfreeze",
             "dim_customers.account_relationship_days",
             "dim_deposit_accounts.days_since_first_customer_induced_transaction",
-
-            // "fact_transaction_details.tran_date_timestamp",
+            "dim_gam.acct_name",
+            "dim_deposit_accounts.minimum_balance",
+            "dim_deposit_accounts.available_amount",
+            "dim_branch.branch_description",
+            // "dim_deposit_accounts.foracid",
+            "dim_gam.account_balance",
+            "dim_gam.interest_rate",
+            "dim_gam.lien_amt",
           ],
           order: {
             "dim_gam.last_digital_transaction_date": "desc",
@@ -138,7 +143,11 @@ const depositFetchData = {
           //   "fact_transaction_details.last_transaction_date",
           // ],
           filters: [
-            { member: "dim_gam.foracid", operator: "equals", values: [foracid] },
+            {
+              member: "dim_gam.foracid",
+              operator: "equals",
+              values: [foracid],
+            },
             {
               member: "dim_customers.cif_id",
               operator: "equals",
@@ -147,18 +156,18 @@ const depositFetchData = {
             {
               member: "dim_customers.cust_type",
               operator: "equals",
-              values: ["INDIVIDUAL"]
+              values: ["INDIVIDUAL"],
             },
 
             {
               member: "dim_product.product_scheme_category",
               operator: "equals",
-              values: ["Deposit"]
+              values: ["Deposit"],
             },
             {
               member: "dim_product.product_scheme_sub_category",
               operator: "equals",
-              values: [sub_cat]
+              values: [sub_cat],
             },
           ],
           // limit: 1,
@@ -171,7 +180,6 @@ const depositFetchData = {
       }
     );
     return response.data.data;
-
   },
   getdeposit_details: async (id) => {
     const response = await axios.post(
@@ -246,7 +254,11 @@ const depositFetchData = {
       {
         query: {
           filters: [
-            { member: "dim_interest_rate.foracid", operator: "equals", values: [id] },
+            {
+              member: "dim_interest_rate.foracid",
+              operator: "equals",
+              values: [id],
+            },
           ],
           dimensions: [
             "dim_interest_rate.start_date",
@@ -296,7 +308,11 @@ const depositFetchData = {
       {
         query: {
           filters: [
-            { member: "dim_signatories.foracid", operator: "equals", values: [id] },
+            {
+              member: "dim_signatories.foracid",
+              operator: "equals",
+              values: [id],
+            },
           ],
           dimensions: [
             "dim_signatories.signatory_name",
@@ -315,6 +331,3 @@ const depositFetchData = {
   },
 };
 export default depositFetchData;
-
-
-

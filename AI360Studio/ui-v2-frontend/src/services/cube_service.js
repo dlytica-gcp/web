@@ -108,6 +108,7 @@ const individualCustomerFetchData = {
               "dim_customers.cif_id",
               "dim_customers.home_branch",
               "dim_customers.cust_relationship_start_date",
+             
             ],
             order: { "dim_customers.full_name": "asc" },
             limit,
